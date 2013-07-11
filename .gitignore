@@ -1,0 +1,12 @@
+# IDEA settings #
+.idea/*
+
+# Build target #
+target
+target/*
+out/*
+*.log
+*.iml
+*.ipr
+*.iws
+*.war
