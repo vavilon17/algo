@@ -49,19 +49,45 @@ public class QuickSortTest {
     public void testCalcComparisons() {
         // With the pivot as a first element
         int[] a = AlgoUtils.readIntArray("resources/stamford/test/ass2/10")
-        assert calcComparisons(a) == 25L;
+        assert calcComparisons(a, QuickSort.PivotChoosingCase.FIRST) == 25L;
 
         a = AlgoUtils.readIntArray("resources/stamford/test/ass2/100")
-        assert calcComparisons(a) == 615L;
+        assert calcComparisons(a, QuickSort.PivotChoosingCase.FIRST) == 615L;
 
         a = AlgoUtils.readIntArray("resources/stamford/test/ass2/1000")
-        assert calcComparisons(a) == 10297L;
+        assert calcComparisons(a, QuickSort.PivotChoosingCase.FIRST) == 10297L;
 
-        // With the pivot as a first element
+        // With the pivot as a last element
+        a = AlgoUtils.readIntArray("resources/stamford/test/ass2/10")
+        assert calcComparisons(a, QuickSort.PivotChoosingCase.LAST) == 29L;
+
+        a = AlgoUtils.readIntArray("resources/stamford/test/ass2/100")
+        assert calcComparisons(a, QuickSort.PivotChoosingCase.LAST) == 587L;
+
+        a = AlgoUtils.readIntArray("resources/stamford/test/ass2/1000")
+        assert calcComparisons(a, QuickSort.PivotChoosingCase.LAST) == 10184L;
+
+        // With the pivot as a last element
+        a = AlgoUtils.readIntArray("resources/stamford/test/ass2/10")
+        assert calcComparisons(a, QuickSort.PivotChoosingCase.MEDIAN_OF_THREE) == 21L;
+
+        a = AlgoUtils.readIntArray("resources/stamford/test/ass2/100")
+        assert calcComparisons(a, QuickSort.PivotChoosingCase.MEDIAN_OF_THREE) == 518L;
+
+        a = AlgoUtils.readIntArray("resources/stamford/test/ass2/1000")
+        assert calcComparisons(a, QuickSort.PivotChoosingCase.MEDIAN_OF_THREE) == 8921L;
     }
 
-    private long calcComparisons(int[] unsortedArray) {
-        return quickSort.calcComparisons(unsortedArray);
+    @Test
+    public void testSelection() {
+        assert AlgoUtils.getIthElement(1, 3, 2, 4) == 2
+        assert AlgoUtils.getIthElement(3, 3, 2, 4, 6, 9, 1) == 3
+        assert AlgoUtils.getIthElement(4, 18, 17, 4, 11, 121, 6) == 17
+        assert AlgoUtils.getIthElement(2, 5, 6, 8) == 6
+    }
+
+    private long calcComparisons(int[] unsortedArray, QuickSort.PivotChoosingCase mode) {
+        return quickSort.calcComparisons(unsortedArray, mode);
     }
 
     private int[] sort(int[] unsortedArray) {

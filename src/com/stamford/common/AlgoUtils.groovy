@@ -21,6 +21,11 @@ class AlgoUtils {
         intArr
     }
 
+    static int getIthElement(int i, int... values) {
+        Arrays.sort(values);
+        return values[i-1];
+    }
+
     static void printArray(int[] array) {
         array.each {print it + ", "}
     }
