@@ -34,22 +34,21 @@ class AlgoUtils {
 
     static GraphAdjacencyLists readGraphAdjList(String fileName) {
         GraphAdjacencyLists graph = new GraphAdjacencyLists()
+        graph.edges = new HashMap<Integer, List<Integer>>();
+        List<Integer> edges = null;
         new File(fileName).eachLine { line ->
-            List<String> lineNumbers = AlgoUtils.transformLineWithSpaces(line)
-            Integer baseVertex = lineNumbers.get(0)
-
+            int[] lineNumbers = AlgoUtils.transformLineWithSpaces(line)
+            Integer baseVertex = lineNumbers[0]
+            edges = new ArrayList<Integer>(lineNumbers.length - 1)
+            graph.getEdges().put(baseVertex, edges)
             lineNumbers.eachWithIndex { lnItem, index ->
                 if (index > 0) {
-                    graph.getEdges().put(baseVertex)
-                } else {
-
+                    edges.add(lnItem)
                 }
             }
 
         }
-        /*new File(fileName).eachLine { line ->
-
-        }*/
+        graph
     }
 
     /*static List<String> transformLineWithSpaces(String spacedLine) {

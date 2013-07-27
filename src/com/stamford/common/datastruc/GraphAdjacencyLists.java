@@ -1,5 +1,9 @@
 package com.stamford.common.datastruc;
 
+import org.codehaus.groovy.runtime.dgmimpl.arrays.IntegerArrayGetAtMetaMethod;
+
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -9,18 +13,15 @@ import java.util.Map;
  */
 public class GraphAdjacencyLists {
 
-    private List<Integer> vertices;
     private Map<Integer, List<Integer>> edges;
 
-    public int[] verticesArr;
-    public int[][] edgesArr;
-
-    public List<Integer> getVertices() {
-        return vertices;
-    }
-
-    public void setVertices(List<Integer> vertices) {
-        this.vertices = vertices;
+    public GraphAdjacencyLists copyGraph() {
+        GraphAdjacencyLists copyGraph = new GraphAdjacencyLists();
+        copyGraph.setEdges(new HashMap<Integer, List<Integer>>());
+        for (Integer origKey : edges.keySet()) {
+            copyGraph.getEdges().put(new Integer(origKey), new ArrayList<Integer>(edges.get(origKey)));
+        }
+        return copyGraph;
     }
 
     public Map<Integer, List<Integer>> getEdges() {
@@ -31,19 +32,4 @@ public class GraphAdjacencyLists {
         this.edges = edges;
     }
 
-    public int[] getVerticesArr() {
-        return verticesArr;
-    }
-
-    public void setVerticesArr(int[] verticesArr) {
-        this.verticesArr = verticesArr;
-    }
-
-    public int[][] getEdgesArr() {
-        return edgesArr;
-    }
-
-    public void setEdgesArr(int[][] edgesArr) {
-        this.edgesArr = edgesArr;
-    }
 }
