@@ -51,16 +51,24 @@ class AlgoUtils {
         graph
     }
 
-    /*static List<String> transformLineWithSpaces(String spacedLine) {
-        return spacedLine.split("\\s+").toList();
-    }*/
+    static GraphAdjacencyLists readGraphLineByEdge(String fileName) {
+        GraphAdjacencyLists graph = new GraphAdjacencyLists()
+        graph.edges = new HashMap<Integer, List<Integer>>();
+        new File(fileName).eachLine { line ->
+            int[] lineNumbers = AlgoUtils.transformLineWithSpaces(line)
+            Integer baseVertex = lineNumbers[0]
+            if (!graph.edges.containsKey(baseVertex)) {
+                graph.edges.put(baseVertex, new ArrayList<Integer>())
+            }
+            graph.edges.get(baseVertex).add(lineNumbers[1])
+            if (!graph.edges.containsKey(lineNumbers[1])) {
+                graph.edges.put(lineNumbers[1], new ArrayList<Integer>())
+            }
+        }
+        graph
+    }
 
     static int[] transformLineWithSpaces(String spacedLine) {
-        /*String[] strArr = spacedLine.split("\\s+").toList()
-        int[] intArr = new int[strArr.length]
-        strArr.each {
-            intArr
-        }*/
         spacedLine.split("\\s+").collect {
             it.toInteger()
         }

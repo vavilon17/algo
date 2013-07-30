@@ -43,4 +43,43 @@ class AlgoUtilsTest {
         assert graph.edges.get(7) == [3, 2, 8]
         assert graph.edges.get(9) == [8, 5]
     }
+
+    @Test
+    public void readGraphLineByEdgeTest() {
+        String fileName = "resources/stamford/test/ass4/readgraph/ex1"
+        GraphAdjacencyLists graph = AlgoUtils.readGraphLineByEdge(fileName)
+        assert graph.edges.size() == 9
+        assert graph.edges.get(1) == [9]
+        assert graph.edges.get(2) == [7, 6, 5]
+        assert graph.edges.get(3) == [4, 1, 9]
+        assert graph.edges.get(4) == [2, 5]
+        assert graph.edges.get(5) == [6, 7, 1, 9]
+        assert graph.edges.get(6) == [7]
+        assert graph.edges.get(7) == [2, 3]
+        assert graph.edges.get(8) == [4, 1]
+        assert graph.edges.get(9) == [7]
+
+        fileName = "resources/stamford/test/ass4/readgraph/ex2"
+        graph = AlgoUtils.readGraphLineByEdge(fileName)
+        assert graph.edges.size() == 19
+        assert graph.edges.get(1) == [234, 33456]
+        assert graph.edges.get(2) == [56]
+        assert graph.edges.get(4) == [1278]
+        assert graph.edges.get(5) == [6]
+        assert graph.edges.get(6) == []
+        assert graph.edges.get(7) == [18990, 12, 666]
+        assert graph.edges.get(8) == [13, 69, 16]
+        assert graph.edges.get(9) == [2, 6107543]
+        assert graph.edges.get(12) == []
+        assert graph.edges.get(13) == []
+        assert graph.edges.get(16) == []
+        assert graph.edges.get(56) == []
+        assert graph.edges.get(69) == []
+        assert graph.edges.get(234) == []
+        assert graph.edges.get(666) == []
+        assert graph.edges.get(1278) == []
+        assert graph.edges.get(18990) == []
+        assert graph.edges.get(33456) == []
+        assert graph.edges.get(6107543) == []
+    }
 }
