@@ -2,6 +2,7 @@ package com.stamford
 
 import com.stamford.common.AlgoUtils
 import com.stamford.common.datastruc.GraphAdjacencyLists
+import com.stamford.common.datastruc.GraphSCC
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4
@@ -81,5 +82,35 @@ class AlgoUtilsTest {
         assert graph.edges.get(18990) == []
         assert graph.edges.get(33456) == []
         assert graph.edges.get(6107543) == []
+    }
+
+    @Test
+    public void readSCCGraph() {
+        String fileName = "resources/stamford/test/ass4/dfs/ex2"
+        GraphSCC graph = AlgoUtils.readGraphForSCC(fileName)
+        //check direct graph
+        assert graph.countVertices == 9
+        assert graph.edges.get(1) == [7]
+        assert graph.edges.get(2) == [5]
+        assert graph.edges.get(3) == [9]
+        assert graph.edges.get(4) == [1]
+        assert graph.edges.get(5) == [8]
+        assert graph.edges.get(6) == [3, 8]
+        assert graph.edges.get(7) == [4, 9]
+        assert graph.edges.get(8) == [2]
+        assert graph.edges.get(9) == [6]
+
+        //check reversed graph
+        GraphAdjacencyLists reversedGraph = graph.reversedGraph
+        assert reversedGraph.countVertices == 9
+        assert reversedGraph.edges.get(1) == [4]
+        assert reversedGraph.edges.get(2) == [8]
+        assert reversedGraph.edges.get(3) == [6]
+        assert reversedGraph.edges.get(4) == [7]
+        assert reversedGraph.edges.get(5) == [2]
+        assert reversedGraph.edges.get(6) == [9]
+        assert reversedGraph.edges.get(7) == [1]
+        assert reversedGraph.edges.get(8) == [5, 6]
+        assert reversedGraph.edges.get(9) == [3, 7]
     }
 }

@@ -1,11 +1,10 @@
 package com.stamford.graph.scc;
 
+import com.stamford.common.AlgoUtils;
 import com.stamford.common.datastruc.GraphAdjacencyLists;
+import com.stamford.common.datastruc.GraphSCC;
 
-import java.util.Comparator;
-import java.util.Iterator;
-import java.util.Set;
-import java.util.TreeSet;
+import java.util.*;
 
 /**
  * User: vit
@@ -28,10 +27,16 @@ public class CalcSCC {
     Integer s = null;
 
     public static final void main(String[] args) {
-
+        String fileName = "resources/stamford/ass4/SCC.txt";
+        GraphSCC graph = AlgoUtils.readGraphForSCC(fileName);
+        CalcSCC calcSCCProgram = new CalcSCC();
+        Set<Integer> res = calcSCCProgram.calcSCC(graph, null);
+        for (int i : res) {
+            System.out.print(i + ", ");
+        }
     }
 
-    public Set<FinishingTime> calcSCC(GraphAdjacencyLists graph, Set<FinishingTime> finTimes) {
+    public Set calcSCC(GraphSCC graph, Set<FinishingTime> finTimes) {
         t = 0;
         s = null;
         // first DFS Loop - compute finishing times
@@ -53,12 +58,23 @@ public class CalcSCC {
 
         //second DFS loop
         exploration = new boolean[graph.getEdges().size()];
-        /*Iterator<FinishingTime> it = finTimes.iterator();
-        int count = 0;
+        GraphAdjacencyLists reversedGraph = graph.getReversedGraph();
+        Set<Integer> sccSizes = new TreeSet<Integer>(new Comparator<Integer>() {
+            @Override
+            public int compare(Integer o1, Integer o2) {
+                return o2 <= o1 ? -1 : 1;
+            }
+        });
+        Iterator<FinishingTime> it = finTimes.iterator();
         while(it.hasNext()) {
-            //dfsLoop();
-        }               */
-        return finTimes;
+            t = 0;
+            FinishingTime nextVertex = it.next();
+            if (!exploration[nextVertex.originalVertex -1]) {
+                dfsLoop(reversedGraph, nextVertex.originalVertex, exploration);
+                sccSizes.add(t);
+            }
+        }
+        return sccSizes;
     }
 
     public void dfsLoopForSCC(GraphAdjacencyLists graph, Integer vertex, boolean[] exploration, Set<FinishingTime> finTimes) {
@@ -79,5 +95,6 @@ public class CalcSCC {
                 dfsLoop(graph, edgeVertex, exploredFlags);
             }
         }
+        t++;
     }
 }

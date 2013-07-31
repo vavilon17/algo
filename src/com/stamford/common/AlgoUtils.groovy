@@ -1,6 +1,7 @@
 package com.stamford.common
 
 import com.stamford.common.datastruc.GraphAdjacencyLists
+import com.stamford.common.datastruc.GraphSCC
 
 /**
  * Created by YaskalVV on 11.07.13.
@@ -65,6 +66,38 @@ class AlgoUtils {
                 graph.edges.put(lineNumbers[1], new ArrayList<Integer>())
             }
         }
+        graph
+    }
+
+    static GraphSCC readGraphForSCC(String fileName) {
+        GraphSCC graph = new GraphSCC()
+        graph.edges = new HashMap<Integer, List<Integer>>()
+        graph.reversedGraph.edges = new HashMap<Integer, List<Integer>>()
+        Integer baseVertex, edgeVertex
+        new File(fileName).eachLine { line ->
+            int[] lineNumbers = AlgoUtils.transformLineWithSpaces(line)
+            baseVertex = lineNumbers[0]
+            edgeVertex = lineNumbers[1]
+            //file base graph
+            if (!graph.edges.containsKey(baseVertex)) {
+                graph.edges.put(baseVertex, new ArrayList<Integer>())
+            }
+            graph.edges.get(baseVertex).add(lineNumbers[1])
+            if (!graph.edges.containsKey(lineNumbers[1])) {
+                graph.edges.put(lineNumbers[1], new ArrayList<Integer>())
+            }
+
+            //fill reversed graph
+            if (!graph.reversedGraph.edges.containsKey(edgeVertex)) {
+                graph.reversedGraph.edges.put(edgeVertex, new ArrayList<Integer>())
+            }
+            graph.reversedGraph.edges.get(edgeVertex).add(baseVertex)
+            if (!graph.reversedGraph.edges.containsKey(baseVertex)) {
+                graph.reversedGraph.edges.put(baseVertex, new ArrayList<Integer>())
+            }
+        }
+        graph.setCountVertices(graph.edges.size())
+        graph.reversedGraph.setCountVertices(graph.reversedGraph.edges.size())
         graph
     }
 

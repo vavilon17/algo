@@ -14,6 +14,7 @@ import java.util.Map;
 public class GraphAdjacencyLists {
 
     private Map<Integer, List<Integer>> edges;
+    private int countVertices = 0;
 
     public GraphAdjacencyLists copyGraph() {
         GraphAdjacencyLists copyGraph = new GraphAdjacencyLists();
@@ -32,4 +33,11 @@ public class GraphAdjacencyLists {
         this.edges = edges;
     }
 
+    public int getCountVertices() {
+        return countVertices;
+    }
+
+    public void setCountVertices(int countVertices) {
+        this.countVertices = countVertices;
+    }
 }
