@@ -1,6 +1,7 @@
 package com.stamford.common
 
 import com.stamford.common.datastruc.GraphAdjacencyLists
+import com.stamford.common.datastruc.GraphPath
 import com.stamford.common.datastruc.GraphSCC
 
 /**
@@ -105,5 +106,26 @@ class AlgoUtils {
         spacedLine.split("\\s+").collect {
             it.toInteger()
         }
+    }
+
+    static GraphPath readGraphPath(String fileName) {
+        GraphPath graph = new GraphPath();
+        Set<Integer> vertices = new HashSet<>();
+        String[] items, heads
+        int currentTail
+        new File(fileName).eachLine { line ->
+            items = line.split("\\s+")
+            currentTail = Integer.parseInt(items[0])
+            vertices.add(currentTail)
+            items.eachWithIndex { edgeWithLength, index ->
+                if (index != 0) {
+                    heads = edgeWithLength.split(",")
+                    graph.addEdge(currentTail, Integer.parseInt(heads[0]), Integer.parseInt(heads[1]))
+                    vertices.add(Integer.parseInt(heads[0]))
+                }
+            }
+        }
+        graph.setVerticesCount(vertices.size())
+        graph
     }
 }

@@ -2,6 +2,7 @@ package com.stamford
 
 import com.stamford.common.AlgoUtils
 import com.stamford.common.datastruc.GraphAdjacencyLists
+import com.stamford.common.datastruc.GraphPath
 import com.stamford.common.datastruc.GraphSCC
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -112,5 +113,29 @@ class AlgoUtilsTest {
         assert reversedGraph.edges.get(7) == [1]
         assert reversedGraph.edges.get(8) == [5, 6]
         assert reversedGraph.edges.get(9) == [3, 7]
+    }
+
+    @Test
+    public void readGraphPath() {
+        String fileName = "resources/stamford/test/ass5/readgraph/ex1"
+        GraphPath graph = AlgoUtils.readGraphPath(fileName)
+        assert graph.edgesCount == 5
+        assert graph.verticesCount == 5
+        assert graph.getIncoming(4).get(0).length == 5
+        assert graph.getIncoming(5).get(0).length == 13
+        assert graph.getIncoming(2).size() == 2
+
+        fileName = "resources/stamford/test/ass5/readgraph/ex2"
+        graph = AlgoUtils.readGraphPath(fileName)
+        assert graph.edgesCount == 11
+        assert graph.verticesCount == 7
+        graph.getOutcoming(1).size() == 1
+        graph.getOutcoming(1).get(0).length == 1
+        graph.getOutcoming(6).size() == 2
+        graph.getOutcoming(6).get(0).length == 8
+        graph.getOutcoming(6).get(1).length == 9
+        graph.getIncoming(3).size() == 2
+        graph.getIncoming(3).get(0).length == 2
+        graph.getIncoming(3).get(1).length == 5
     }
 }
