@@ -31,8 +31,13 @@ public class CalcSCC {
         GraphSCC graph = AlgoUtils.readGraphForSCC(fileName);
         CalcSCC calcSCCProgram = new CalcSCC();
         Set<Integer> res = calcSCCProgram.calcSCC(graph, null);
+        int cc = 0;
         for (int i : res) {
-            System.out.print(i + ", ");
+           if (cc < 10) {
+               System.out.print(i + ", ");
+           }
+            cc++;
+           // System.out.print(i + ", ");
         }
     }
 
