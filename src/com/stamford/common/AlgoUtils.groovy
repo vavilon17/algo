@@ -17,12 +17,42 @@ class AlgoUtils {
         listToIntArray(arr)
     }
 
+    static long[] readLongArray(String fileName) {
+        def arr = []
+        new File(fileName).eachLine {
+            arr << Long.parseLong(it)
+        }
+        listToLongArray(arr)
+    }
+
+    static long[] readUniqueLongArray(String fileName) {
+        def arr = []
+        long val
+        HashSet<Long> used = new HashSet<Long>()
+        new File(fileName).eachLine {
+            val = Long.parseLong(it)
+            if (!used.contains(val)) {
+                arr << Long.parseLong(it)
+                used.add(val)
+            }
+        }
+        listToLongArray(arr)
+    }
+
     static listToIntArray(def inputList) {
         int[] intArr = new int[inputList.size]
         for (int i=0; i<inputList.size; i++) {
             intArr[i] = inputList.get(i)
         }
         intArr
+    }
+
+    static listToLongArray(def inputList) {
+        long[] longArr = new long[inputList.size]
+        for (int i=0; i<inputList.size; i++) {
+            longArr[i] = inputList.get(i)
+        }
+        longArr
     }
 
     static int getIthElement(int i, int... values) {
@@ -127,5 +157,13 @@ class AlgoUtils {
         }
         graph.setVerticesCount(vertices.size())
         graph
+    }
+
+    static int sumListElements(List<Integer> list) {
+        int res = 0
+        for (int item : list) {
+            res += item;
+        }
+        return res
     }
 }

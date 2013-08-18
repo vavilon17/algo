@@ -5,5 +5,6 @@ package com.stamford.common.datastruc.heap.exception;
  * User: vit
  * Date: 17.08.13
  */
-public class HeapIsEmptyException {
+public class HeapIsEmptyException extends Exception {
+
 }

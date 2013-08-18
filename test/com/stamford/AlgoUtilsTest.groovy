@@ -138,4 +138,12 @@ class AlgoUtilsTest {
         graph.getIncoming(3).get(0).length == 2
         graph.getIncoming(3).get(1).length == 5
     }
+
+    @Test
+    public void readLongArrayTest() {
+        String fileName = "resources/stamford/test/ass6/readarray/ex1"
+        long[] arr = AlgoUtils.readLongArray(fileName)
+        assert arr.length == 6
+        assert arr[5] == 23555555234L
+    }
 }
