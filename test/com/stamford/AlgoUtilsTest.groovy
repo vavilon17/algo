@@ -17,6 +17,7 @@ class AlgoUtilsTest {
 
     @Test
     public void transformSpacedLineTest() {
+
         String spacedLine = "1   3  4       5 6 7    1   44  234  0 -1   -16"
         assert AlgoUtils.transformLineWithSpaces(spacedLine).toList() == [1, 3, 4, 5, 6, 7, 1, 44, 234, 0, -1, -16]
 
