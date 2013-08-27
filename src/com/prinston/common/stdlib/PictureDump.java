@@ -1,3 +1,4 @@
+package com.prinston.common.stdlib;
 /*************************************************************************
  *  Compilation:  javac PictureDump.java
  *  Execution:    java PictureDump width height < file

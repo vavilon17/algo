@@ -1,3 +1,4 @@
+package com.prinston.common.stdlib;
 /**
  * Test client for StdIn and In. 
  **/

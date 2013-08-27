@@ -1,3 +1,4 @@
+package com.prinston.common.stdlib;
 /*************************************************************************
  *  Compilation:  javac BinaryDump.java
  *  Execution:    java BinaryDump N < file

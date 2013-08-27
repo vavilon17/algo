@@ -1,3 +1,4 @@
+package com.prinston.common.stdlib;
 /*************************************************************************
  *  Compilation:  javac BinaryIn.java
  *  Execution:    java BinaryIn input output

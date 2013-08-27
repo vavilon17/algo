@@ -1,3 +1,4 @@
+package com.prinston.common.stdlib;
 /*************************************************************************
  *  Compilation:  javac BinaryOut.java
  *  Execution:    java BinaryOut

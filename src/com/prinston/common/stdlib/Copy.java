@@ -1,3 +1,4 @@
+package com.prinston.common.stdlib;
 /*************************************************************************
  *  Compilation:  javac Copy.java
  *  Execution:    java Copy < file

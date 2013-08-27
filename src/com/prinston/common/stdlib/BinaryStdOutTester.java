@@ -1,3 +1,4 @@
+package com.prinston.common.stdlib;
 /*************************************************************************
  *  Compilation:  javac BinaryStdOutTester.java
  *  Execution:    java BinaryStdOutTester

@@ -1,3 +1,8 @@
+package com.prinston.common.algs4;
+
+import com.prinston.common.stdlib.StdIn;
+import com.prinston.common.stdlib.StdOut;
+
 /****************************************************************************
  *  Compilation:  javac WeightedQuickUnionUF.java
  *  Execution:  java WeightedQuickUnionUF < input.txt

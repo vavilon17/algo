@@ -1,4 +1,4 @@
-
+package com.prinston.common.stdlib;
 /*************************************************************************
  *  Compilation:  javac StdArrayIO.java
  *  Execution:    java StdArrayIO < input.txt

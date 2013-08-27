@@ -1,5 +1,9 @@
 package com.prinston.percolation;
 
+import com.prinston.common.algs4.QuickFindUF;
+import com.prinston.common.algs4.QuickUnionPathCompressionUF;
+import com.prinston.common.algs4.WeightedQuickUnionUF;
+
 /**
  * Created with IntelliJ IDEA.
  * User: vit
@@ -7,38 +11,59 @@ package com.prinston.percolation;
  */
 public class Percolation {
 
-    //private QuickUnionPathCompressionUF model;
-    int N;
+    private WeightedQuickUnionUF model;
+    private int N;
+    private boolean[][] sites;
 
-    // create N-by-N grid, with all sites blocked
     public Percolation(int N) {
+        model = new WeightedQuickUnionUF(N*N + 2);
+        sites = new boolean[N][N];
+        int lastGridIndex = N*N;
+        for (int i = 1; i <= N; i++) {
+            model.union(i, 0);
+            model.union(lastGridIndex - i - 1, lastGridIndex + 1);
+        }
+        this.N = N;
     }
 
-    // open site (row i, column j) if it is not already
     public void open(int i, int j) {
         if (i < 1 || i > N || j < 1 || j > N) {
             throw new IndexOutOfBoundsException("Out of the ranges");
         }
+        sites[i-1][j-1] = true;
+        //check top element
+        if (i > 1 && isOpen(i-1, j)) {
+            model.union((i-1)*N + j, (i-2)*N + j);
+        }
+        //check right element
+        if (j < N && isOpen(i, j+1)) {
+            model.union((i-1)*N + j, (i-1)*N + j + 1);
+        }
+        //check bottom element
+        if (i < N && isOpen(i+1, j)) {
+            model.union((i-1)*N + j, i*N + j);
+        }
+        //check left element
+        if (j > 1 && isOpen(i, j-1)) {
+            model.union((i-1)*N + j, (i-1)*N + j - 1);
+        }
     }
 
-    // is site (row i, column j) open?
     public boolean isOpen(int i, int j) {
         if (i < 1 || i > N || j < 1 || j > N) {
             throw new IndexOutOfBoundsException("Out of the ranges");
         }
-        return false;
+        return sites[i-1][j-1];
     }
 
-    // is site (row i, column j) full?
     public boolean isFull(int i, int j) {
         if (i < 1 || i > N || j < 1 || j > N) {
             throw new IndexOutOfBoundsException("Out of the ranges");
         }
-        return false;
+        return model.connected((i-1)*N + j, 0);
     }
 
-    // does the system percolate?
     public boolean percolates() {
-        return false;
+        return model.connected(0, N*N + 1);
     }
 }

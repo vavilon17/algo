@@ -1,3 +1,4 @@
+package com.prinston.common.algs4;
 /****************************************************************************
  *  Compilation:  javac UF.java
  *  Execution:    java UF < input.txt
@@ -21,6 +22,9 @@
  *
  ****************************************************************************/
 
+
+import com.prinston.common.stdlib.StdIn;
+import com.prinston.common.stdlib.StdOut;
 
 /**
  *  The <tt>UF</tt> class represents a union-find data data structure.
