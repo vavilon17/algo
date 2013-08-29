@@ -1,7 +1,5 @@
 package com.prinston.percolation;
 
-import com.prinston.common.algs4.QuickFindUF;
-import com.prinston.common.algs4.QuickUnionPathCompressionUF;
 import com.prinston.common.algs4.WeightedQuickUnionUF;
 
 /**
@@ -12,16 +10,19 @@ import com.prinston.common.algs4.WeightedQuickUnionUF;
 public class Percolation {
 
     private WeightedQuickUnionUF model;
+    private WeightedQuickUnionUF forIsFullModel;
     private int N;
     private boolean[][] sites;
 
     public Percolation(int N) {
         model = new WeightedQuickUnionUF(N*N + 2);
+        forIsFullModel = new WeightedQuickUnionUF(N*N + 1);
         sites = new boolean[N][N];
         int lastGridIndex = N*N;
         for (int i = 1; i <= N; i++) {
-            model.union(i, 0);
-            model.union(lastGridIndex - i - 1, lastGridIndex + 1);
+            model.union(0, i);
+            forIsFullModel.union(0, i);
+            model.union(lastGridIndex +1, lastGridIndex - i + 1);
         }
         this.N = N;
     }
@@ -34,18 +35,22 @@ public class Percolation {
         //check top element
         if (i > 1 && isOpen(i-1, j)) {
             model.union((i-1)*N + j, (i-2)*N + j);
+            forIsFullModel.union((i-1)*N + j, (i-2)*N + j);
         }
         //check right element
         if (j < N && isOpen(i, j+1)) {
             model.union((i-1)*N + j, (i-1)*N + j + 1);
+            forIsFullModel.union((i-1)*N + j, (i-1)*N + j + 1);
         }
         //check bottom element
         if (i < N && isOpen(i+1, j)) {
             model.union((i-1)*N + j, i*N + j);
+            forIsFullModel.union((i-1)*N + j, i*N + j);
         }
         //check left element
         if (j > 1 && isOpen(i, j-1)) {
             model.union((i-1)*N + j, (i-1)*N + j - 1);
+            forIsFullModel.union((i-1)*N + j, (i-1)*N + j - 1);
         }
     }
 
@@ -60,10 +65,10 @@ public class Percolation {
         if (i < 1 || i > N || j < 1 || j > N) {
             throw new IndexOutOfBoundsException("Out of the ranges");
         }
-        return model.connected((i-1)*N + j, 0);
+        return isOpen(i,j) && forIsFullModel.connected((i-1)*N + j, 0);
     }
 
     public boolean percolates() {
-        return model.connected(0, N*N + 1);
+        return (N == 1) ? isOpen(1, 1) : model.connected(0, N*N + 1);
     }
 }
