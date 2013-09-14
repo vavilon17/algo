@@ -18,14 +18,7 @@ public class RandomQueueTests {
     public void randQueueTest() {
         long start = Runtime.getRuntime().freeMemory();
         RandomizedQueue<Integer> rq = new RandomizedQueue<Integer>();
-        /*int count = 5;
-        for (int i = 1; i <= 16; i++) {
-            rq.enqueue(i);
-        }
-        for (int i = 1; i <= 12 ; i++) {
-            rq.dequeue();
-        }
-        rq.enqueue(5);*/
+
         rq.enqueue(1);
         rq.dequeue();
         rq.enqueue(2);

@@ -9,8 +9,6 @@ import java.util.Map;
  * Created with IntelliJ IDEA.
  * User: vit
  * Date: 11.08.13
- * Time: 17:20
- * To change this template use File | Settings | File Templates.
  */
 public class GraphPath {
 

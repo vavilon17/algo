@@ -4,6 +4,10 @@ import com.stamford.common.AlgoUtils
 import com.stamford.common.datastruc.GraphAdjacencyLists
 import com.stamford.common.datastruc.GraphPath
 import com.stamford.common.datastruc.GraphSCC
+import com.stamford.mst.GraphMST
+import com.stamford.mst.PrimsMST
+import com.stamford.scheduling.Job
+import com.stamford.scheduling.JobSubstract
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4
@@ -142,9 +146,53 @@ class AlgoUtilsTest {
 
     @Test
     public void readLongArrayTest() {
-        String fileName = "resources/stamford/test/ass6/readarray/ex1"
+        /*String fileName = "resources/stamford/test/ass6/readarray/ex1"
         long[] arr = AlgoUtils.readLongArray(fileName)
-        assert arr.length == 6
-        assert arr[5] == 23555555234L
+        assert arr.length == 7
+        assert arr[5] == 23555555234L*/
+    }
+
+    @Test
+    public void readJobsTest() {
+        String fileName = "resources/stamford/test/ass21/jobsTest"
+        List<Job> jobs = AlgoUtils.readSubstractionJobs(fileName)
+        assert jobs.size() == 6
+        assert jobs.get(3).getWeight() == 234
+        assert jobs.get(3).getLength() == 123
+        assert jobs.get(0).id == 1
+        assert jobs.get(jobs.size() - 1).id == jobs.size()
+    }
+
+    @Test
+    public void readJobsWithPriorityTest() {
+        String fileName = "resources/stamford/test/ass21/jobsTest2"
+        List<Job> jobs = AlgoUtils.readSubstractionJobs(fileName)
+        Job[] array = (Job[]) jobs.toArray();
+        Arrays.sort(array);
+        assert array.length == 8
+        assert array[0].id == 4
+        assert array[1].id == 7
+        assert array[2].id == 3
+        assert array[3].id == 8
+        assert array[4].id == 5
+        assert array[5].id == 1
+        assert array[6].id == 6
+        assert array[7].id == 2
+    }
+
+    @Test
+    public void prepareMSTGraph() {
+        String fileName = "resources/stamford/test/ass21/g1"
+        PrimsMST program = new PrimsMST();
+        assert program.run(fileName) ==  7
+
+        fileName = "resources/stamford/test/ass21/g2"
+        assert program.run(fileName) ==  37
+
+        fileName = "resources/stamford/test/ass21/g3"
+        assert program.run(fileName) ==  -27534
+
+        fileName = "resources/stamford/test/ass21/primcase.txt"
+        assert program.run(fileName) == 120971
     }
 }

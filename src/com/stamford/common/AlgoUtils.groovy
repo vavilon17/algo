@@ -3,6 +3,12 @@ package com.stamford.common
 import com.stamford.common.datastruc.GraphAdjacencyLists
 import com.stamford.common.datastruc.GraphPath
 import com.stamford.common.datastruc.GraphSCC
+import com.stamford.mst.EdgeMST
+import com.stamford.mst.GraphMST
+import com.stamford.mst.PrimsMST
+import com.stamford.scheduling.Job
+import com.stamford.scheduling.JobMultiplication
+import com.stamford.scheduling.JobSubstract
 
 /**
  * Created by YaskalVV on 11.07.13.
@@ -166,4 +172,56 @@ class AlgoUtils {
         }
         return res
     }
+
+   static List<JobSubstract> readSubstractionJobs(String fileName) {
+       List<JobSubstract> jobs = new ArrayList<JobSubstract>();
+       boolean first = true;
+       String[] temp;
+       int count = 1;
+       new File(fileName).eachLine { line ->
+           if (!first) {
+               temp = line.split(" ");
+               jobs.add(new JobSubstract(count++, Integer.parseInt(temp[0]), Integer.parseInt(temp[1])));
+           } else {
+               first = false;
+           }
+       }
+       jobs
+   }
+
+    static List<JobMultiplication> readMultiplicationJobs(String fileName) {
+        List<JobMultiplication> jobs = new ArrayList<JobMultiplication>();
+        boolean first = true;
+        String[] temp;
+        int count = 1;
+        new File(fileName).eachLine { line ->
+            if (!first) {
+                temp = line.split(" ");
+                jobs.add(new JobMultiplication(count++, Integer.parseInt(temp[0]), Integer.parseInt(temp[1])));
+            } else {
+                first = false;
+            }
+        }
+        jobs
+    }
+
+    static GraphMST fillGraphForMST(String fileName) {
+        GraphMST graph = new GraphMST();
+        boolean first = true;
+        String[] temp;
+        EdgeMST edgeTemp;
+        new File(fileName).eachLine { line ->
+            if (!first) {
+                temp = line.split(" ");
+                edgeTemp = new EdgeMST(Integer.parseInt(temp[0]), Integer.parseInt(temp[1]), Integer.parseInt(temp[2]))
+                graph.edgesOrdered.add(edgeTemp)
+            } else {
+                temp = line.split(" ");
+                graph.setVerticesCount(Integer.parseInt(temp[0]))
+                first = false;
+            }
+        }
+        graph
+    }
+
 }
