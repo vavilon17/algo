@@ -5,7 +5,7 @@ import com.prinston.common.stdlib.StdOut;
 
 /****************************************************************************
  *  Compilation:  javac WeightedQuickUnionUF.java
- *  Execution:  java WeightedQuickUnionUF < input.txt
+ *  Execution:  java WeightedQuickUnionUF < input6.txt
  *  Dependencies: StdIn.java StdOut.java
  *
  *  Weighted quick-union (without path compression).

@@ -1,7 +1,7 @@
 package com.prinston.common.stdlib;
 /*************************************************************************
  *  Compilation:  javac StdArrayIO.java
- *  Execution:    java StdArrayIO < input.txt
+ *  Execution:    java StdArrayIO < input6.txt
  *
  *  A library for reading in 1D and 2D arrays of integers, doubles,
  *  and booleans from standard input and printing them out to

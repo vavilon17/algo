@@ -1,7 +1,7 @@
 package com.prinston.common.algs4;
 /****************************************************************************
  *  Compilation:  javac UF.java
- *  Execution:    java UF < input.txt
+ *  Execution:    java UF < input6.txt
  *  Dependencies: StdIn.java StdOut.java
  *  Data files:   http://algs4.cs.princeton.edu/15uf/tinyUF.txt
  *                http://algs4.cs.princeton.edu/15uf/mediumUF.txt

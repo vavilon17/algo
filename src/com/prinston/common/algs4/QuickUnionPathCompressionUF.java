@@ -5,7 +5,7 @@ import com.prinston.common.stdlib.StdOut;
 
 /****************************************************************************
  *  Compilation:  javac QuickUnionPathCompressionUF.java
- *  Execution:  java QuickUnionPathCompressionUF < input.txt
+ *  Execution:  java QuickUnionPathCompressionUF < input6.txt
  *  Dependencies: StdIn.java StdOut.java
  *
  *  Quick-union with path compression.

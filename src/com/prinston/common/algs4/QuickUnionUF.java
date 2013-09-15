@@ -5,7 +5,7 @@ import com.prinston.common.stdlib.StdOut;
 
 /****************************************************************************
  *  Compilation:  javac QuickUnionUF.java
- *  Execution:  java QuickUnionUF < input.txt
+ *  Execution:  java QuickUnionUF < input6.txt
  *  Dependencies: StdIn.java StdOut.java
  *
  *  Quick-union algorithm.

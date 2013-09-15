@@ -5,7 +5,7 @@ import com.prinston.common.stdlib.StdOut;
 
 /****************************************************************************
  *  Compilation:  javac QuickFindUF.java
- *  Execution:  java QuickFindUF < input.txt
+ *  Execution:  java QuickFindUF < input6.txt
  *  Dependencies: StdIn.java StdOut.java
  *
  *  Quick-find algorithm.

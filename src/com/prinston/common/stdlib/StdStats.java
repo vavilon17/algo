@@ -2,7 +2,7 @@ package com.prinston.common.stdlib;
 
 /*************************************************************************
  *  Compilation:  javac StdStats.java
- *  Execution:    java StdStats < input.txt
+ *  Execution:    java StdStats < input6.txt
  *
  *  Library of statistical functions.
  *
