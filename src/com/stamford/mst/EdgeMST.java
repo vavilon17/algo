@@ -16,7 +16,10 @@ public class EdgeMST extends Edge implements Comparable<Edge>{
     @Override
     public int compareTo(Edge o) {
         int res = Integer.valueOf(this.getLength()).compareTo(Integer.valueOf(o.getLength()));
-        return res != 0 ? res : -1;
+        //FOR PRIMS
+        //return res != 0 ? res : -1;
+        //FOR KRUSKALS
+        return (res != 0) ? res : 1;
     }
 
     @Override

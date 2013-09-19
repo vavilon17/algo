@@ -6,7 +6,7 @@ import org.junit.runners.JUnit4
 
 /**
  * Created with IntelliJ IDEA.
- * User: vit
+ * User: vit                                             `
  * Date: 15.09.13
  */
 @RunWith(JUnit4.class)
