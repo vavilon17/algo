@@ -15,6 +15,9 @@ public class Percolation {
     private boolean[][] sites;
 
     public Percolation(int N) {
+        if (N <= 0) {
+            throw new IllegalArgumentException("size must be positive");
+        }
         model = new WeightedQuickUnionUF(N*N + 2);
         forIsFullModel = new WeightedQuickUnionUF(N*N + 1);
         sites = new boolean[N][N];
