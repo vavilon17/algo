@@ -65,10 +65,14 @@ public class Percolation {
         if (i < 1 || i > N || j < 1 || j > N) {
             throw new IndexOutOfBoundsException("Out of the ranges");
         }
-        return isOpen(i,j) && forIsFullModel.connected((i-1)*N + j, 0);
+        return isOpen(i, j) && forIsFullModel.connected((i-1)*N + j, 0);
     }
 
     public boolean percolates() {
-        return (N == 1) ? isOpen(1, 1) : model.connected(0, N*N + 1);
+        if (N == 1) {
+            return isOpen(1, 1);
+        } else {
+            return model.connected(0, N*N + 1);
+        }
     }
 }

@@ -4,6 +4,8 @@ import com.prinston.common.stdlib.StdOut;
 import com.prinston.common.stdlib.StdRandom;
 import com.prinston.common.stdlib.StdStats;
 
+import java.text.ParseException;
+
 /**
  * Created with IntelliJ IDEA.
  * User: vit
@@ -18,10 +20,10 @@ public class PercolationStats {
         if (N <= 0 || T <= 0) {
             throw new IllegalArgumentException("wrong arguments");
         }
-        int i,j, countOpened;
+        int i, j, countOpened;
         Percolation percolation;
         means = new double[T];
-        for (int k=1; k <= T; k++) {
+        for (int k = 1; k <= T; k++) {
             percolation = new Percolation(N);
             countOpened = 0;
             while (!percolation.percolates()) {
@@ -60,7 +62,7 @@ public class PercolationStats {
             int size = Integer.parseInt(args[0]);
             int count = Integer.parseInt(args[1]);
             new PercolationStats(size, count);
-        } catch (Exception e) {
+        } catch (NumberFormatException e) {
             StdOut.println(e.getMessage());
         }
     }
