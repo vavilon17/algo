@@ -20,7 +20,7 @@ public class GraphAdjacencyLists {
         GraphAdjacencyLists copyGraph = new GraphAdjacencyLists();
         copyGraph.setEdges(new HashMap<Integer, List<Integer>>());
         for (Integer origKey : edges.keySet()) {
-            copyGraph.getEdges().put(new Integer(origKey), new ArrayList<Integer>(edges.get(origKey)));
+            copyGraph.getEdges().put(Integer.valueOf(origKey), new ArrayList<Integer>(edges.get(origKey)));
         }
         return copyGraph;
     }

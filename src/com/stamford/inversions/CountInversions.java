@@ -2,7 +2,6 @@ package com.stamford.inversions;
 
 import com.stamford.common.AlgoUtils;
 
-import java.math.BigDecimal;
 import java.util.Arrays;
 
 /**

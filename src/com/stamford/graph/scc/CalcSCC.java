@@ -96,7 +96,7 @@ public class CalcSCC {
     public void dfsLoop(GraphAdjacencyLists graph, Integer vertex, boolean[] exploredFlags) {
         exploredFlags[vertex - 1] = true;
         for (Integer edgeVertex : graph.getEdges().get(vertex)) {
-            if (exploredFlags[edgeVertex - 1] == false) {
+            if (!exploredFlags[edgeVertex - 1]) {
                 dfsLoop(graph, edgeVertex, exploredFlags);
             }
         }
