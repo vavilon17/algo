@@ -38,7 +38,7 @@ public class Brute {
                         for (int l = k + 1; l < points.length; l++) {
                             if ((points[i].slopeTo(points[j]) == points[i].slopeTo(points[k]))
                                     && (points[i].slopeTo(points[j]) == points[i].slopeTo(points[l]))) {
-                                TreeSet tempSet = new TreeSet();
+                                TreeSet<Point> tempSet = new TreeSet<Point>();
                                 tempSet.add(points[i]);
                                 tempSet.add(points[j]);
                                 tempSet.add(points[k]);
@@ -52,23 +52,23 @@ public class Brute {
         }
         Iterator<Point> itp;
         int i;
-        for (TreeSet s : collinearPoints) {
+        for (TreeSet<Point> s : collinearPoints) {
+            //print
             itp = s.iterator();
             i = 1;
-            Point prev = null, current;
+            Point current;
             while (itp.hasNext()) {
                 current = itp.next();
                 StdOut.print(current.toString());
                 if (i != s.size()) {
                     StdOut.print(" -> ");
                 }
-                if (prev != null) {
-                    prev.drawTo(current);
-                }
-                prev = current;
                 i++;
             }
             StdOut.println();
+
+            //draw
+            s.first().drawTo(s.last());
         }
     }
 }

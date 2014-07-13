@@ -80,23 +80,23 @@ public class Fast {
         }
         Iterator<Point> itp;
         int i;
-        for (TreeSet s : collinearPoints) {
+        for (TreeSet<Point> s : collinearPoints) {
+            //print
             itp = s.iterator();
             i = 1;
-            Point prev = null, current;
+            Point current;
             while (itp.hasNext()) {
                 current = itp.next();
                 StdOut.print(current.toString());
                 if (i != s.size()) {
                     StdOut.print(" -> ");
                 }
-                if (prev != null) {
-                    prev.drawTo(current);
-                }
-                prev = current;
                 i++;
             }
             StdOut.println();
+
+            //draw
+            s.first().drawTo(s.last());
         }
     }
 }
