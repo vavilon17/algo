@@ -4,9 +4,7 @@ import com.prinston.common.algs4.MinPQ;
 import com.prinston.common.stdlib.In;
 import com.prinston.common.stdlib.StdOut;
 
-import java.util.Comparator;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 
 /**
  * Created by vit on 29.07.2014.
@@ -17,43 +15,69 @@ public class Solver {
     private int moves;
     private boolean solvable;
 
-    private final Comparator<Board> comparator = new Comparator<Board>() {
+    private class BoardContainer {
+
+        private int moves;
+        private Board board;
+
+        private BoardContainer(int moves, Board board) {
+            this.moves = moves;
+            this.board = board;
+        }
+
+        public int getMoves() {
+            return moves;
+        }
+
+        public Board getBoard() {
+            return board;
+        }
+    }
+
+    private final Comparator<BoardContainer> comparator = new Comparator<BoardContainer>() {
         @Override
-        public int compare(Board o1, Board o2) {
-            return Integer.compare(o1.manhattan(), o2.manhattan());
+        public int compare(BoardContainer o1, BoardContainer o2) {
+            int result = Integer.compare(o1.getMoves() + o1.getBoard().manhattan(),
+                    o2.getMoves() + o2.getBoard().manhattan());
+            /*if (result == 0) {
+                result = Integer.compare(o1.getMoves() + o1.getBoard().hamming(),
+                        o2.getMoves() + o2.getBoard().hamming());
+            }*/
+            return result;
         }
     };
 
     // find a solution to the initial board (using the A* algorithm)
     public Solver(Board initial) {
-        Board prev = null, prevTwin = null;
+        BoardContainer prev = null, prevTwin = null;
         solution = new LinkedList<Board>();
-        Board current = initial;
-        Board currentTwin = initial.twin();
-        MinPQ<Board> gameTree = new MinPQ<Board>(comparator);
-        MinPQ<Board> gameTwinTree = new MinPQ<Board>(comparator);
-        while (!current.isGoal() && !currentTwin.isGoal()) {
+        BoardContainer current = new BoardContainer(0, initial);
+        BoardContainer currentTwin = new BoardContainer(0, initial.twin());
+        MinPQ<BoardContainer> gameTree = new MinPQ<BoardContainer>(comparator);
+        MinPQ<BoardContainer> gameTwinTree = new MinPQ<BoardContainer>(comparator);
+        while (!current.getBoard().isGoal() && !currentTwin.getBoard().isGoal()) {
             // essential subroutine
-            for (Board neighbor : current.neighbors()) {
+            moves++;
+            for (Board neighbor : current.getBoard().neighbors()) {
                 if (!neighbor.equals(prev)) {
-                    gameTree.insert(neighbor);
+                    gameTree.insert(new BoardContainer(moves, neighbor));
                 }
             }
             prev = current;
-            solution.add(prev);
+            solution.add(prev.getBoard());
             current = gameTree.delMin();
-            moves++;
+//            moves++;
 
             // subroutine for twins
-            for (Board neighbor : currentTwin.neighbors()) {
+            for (Board neighbor : currentTwin.getBoard().neighbors()) {
                 if (!neighbor.equals(prevTwin)) {
-                    gameTwinTree.insert(neighbor);
+                    gameTwinTree.insert(new BoardContainer(moves, neighbor));
                 }
             }
             prevTwin = currentTwin;
             currentTwin = gameTwinTree.delMin();
         }
-        if (current.isGoal()) {
+        if (current.getBoard().isGoal()) {
             solvable = true;
         } else {
             moves = -1;

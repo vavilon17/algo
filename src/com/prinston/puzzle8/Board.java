@@ -10,6 +10,7 @@ public class Board {
 
     private final int N;
     private final int[][] tiles;
+    private int manhattanCached = -1;
 
     public Board(int[][] blocks) {
         if (blocks != null) {
@@ -52,20 +53,23 @@ public class Board {
 
     // sum of Manhattan distances between blocks and goal
     public int manhattan() {
-        int res = 0;
-        int val = 0;
-        int goalI, goalJ;
-        for (int i = 0; i < N; i++) {
-            for (int j = 0; j < N; j++) {
-                val = tiles[i][j];
-                if (val != 0) {
-                    goalI = (int) Math.floor((val - 1)/N);
-                    goalJ = val - goalI*N - 1;
-                    res += Math.abs(goalI - i) + Math.abs(goalJ - j);
+        if (manhattanCached == -1) {
+            int res = 0;
+            int val = 0;
+            int goalI, goalJ;
+            for (int i = 0; i < N; i++) {
+                for (int j = 0; j < N; j++) {
+                    val = tiles[i][j];
+                    if (val != 0) {
+                        goalI = (int) Math.floor((val - 1)/N);
+                        goalJ = val - goalI*N - 1;
+                        res += Math.abs(goalI - i) + Math.abs(goalJ - j);
+                    }
                 }
             }
+            manhattanCached = res;
         }
-        return res;
+        return manhattanCached;
     }
 
     // is this board the goal board?
