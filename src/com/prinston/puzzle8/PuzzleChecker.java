@@ -24,8 +24,11 @@ public class PuzzleChecker {
 
             // solve the slider puzzle
             Board initial = new Board(tiles);
+            long start = System.currentTimeMillis();
             Solver solver = new Solver(initial);
-            System.out.println(filename + ": " + solver.moves());
+            long end = System.currentTimeMillis();
+            System.out.println(filename + ": " + solver.moves() + " in " + (end - start) + " mills");
+            System.out.println(solver.solution());
         }
     }
 }
