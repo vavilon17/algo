@@ -10,7 +10,9 @@ public class Board {
 
     private final int N;
     private final int[][] tiles;
+
     private int manhattanCached = -1;
+    private int hammingCached = -1;
 
     public Board(int[][] blocks) {
         if (blocks != null) {
@@ -36,20 +38,23 @@ public class Board {
 
     // number of blocks out of place
     public int hamming() {
-        int res = 0;
-        int goalI, goalJ;
-        for (int i = 0; i < N; i++) {
-            for (int j = 0; j < N; j++) {
-                if (tiles[i][j] != 0) {
-                    goalI = (int) Math.floor((tiles[i][j] - 1)/N);
-                    goalJ = tiles[i][j] - goalI*N - 1;
-                    if (goalI != i || goalJ != j) {
-                        res++;
+        if (hammingCached == -1) {
+            int res = 0;
+            int goalI, goalJ;
+            for (int i = 0; i < N; i++) {
+                for (int j = 0; j < N; j++) {
+                    if (tiles[i][j] != 0) {
+                        goalI = (int) Math.floor((tiles[i][j] - 1)/N);
+                        goalJ = tiles[i][j] - goalI*N - 1;
+                        if (goalI != i || goalJ != j) {
+                            res++;
+                        }
                     }
                 }
             }
+            hammingCached = res;
         }
-        return res;
+        return hammingCached;
     }
 
     // sum of Manhattan distances between blocks and goal

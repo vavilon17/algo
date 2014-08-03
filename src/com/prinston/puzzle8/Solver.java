@@ -15,6 +15,9 @@ public class Solver {
     private int moves;
     private boolean solvable;
 
+    /**
+     * Helper class to contain board and number of moves made so far
+     */
     private class BoardContainer {
 
         private final int moves;
@@ -32,16 +35,18 @@ public class Solver {
         public Board getBoard() {
             return board;
         }
+
+        public int priority() {
+            return moves + board.manhattan();
+        }
     }
 
     private final Comparator<BoardContainer> comparator = new Comparator<BoardContainer>() {
         @Override
         public int compare(BoardContainer o1, BoardContainer o2) {
-            int result = Integer.compare(o1.getMoves() + o1.getBoard().manhattan(),
-                    o2.getMoves() + o2.getBoard().manhattan());
+            int result = Integer.compare(o1.priority(), o2.priority());
             if (result == 0) {
-                result = Integer.compare(o1.getMoves() + o1.getBoard().hamming(),
-                        o2.getMoves() + o2.getBoard().hamming());
+                result = Integer.compare(o1.getMoves() + o1.getBoard().hamming(), o2.getMoves() + o2.getBoard().hamming());
             }
             return result;
         }
@@ -51,37 +56,36 @@ public class Solver {
     public Solver(Board initial) {
         BoardContainer prev = null, prevTwin = null;
         solution = new LinkedList<Board>();
-        Set<String> unique = new HashSet<String>();
-        Set<String> uniqueTwin = new HashSet<String>();
+        Set<String> uniqueItems = new HashSet<String>();
+        Set<String> uniqueTwinItems = new HashSet<String>();
         BoardContainer current = new BoardContainer(0, initial);
         BoardContainer currentTwin = new BoardContainer(0, initial.twin());
         MinPQ<BoardContainer> gameTree = new MinPQ<BoardContainer>(comparator);
         MinPQ<BoardContainer> gameTwinTree = new MinPQ<BoardContainer>(comparator);
         while (!current.getBoard().isGoal() && !currentTwin.getBoard().isGoal()) {
             // essential subroutine
-            moves++;
             for (Board neighbor : current.getBoard().neighbors()) {
-                if (!neighbor.equals(prev) && !unique.contains(neighbor.toString())) {
-                    gameTree.insert(new BoardContainer(moves, neighbor));
+                if (!neighbor.equals(prev) && !uniqueItems.contains(neighbor.toString())) {
+                    gameTree.insert(new BoardContainer(current.getMoves() + 1, neighbor));
                 }
             }
             prev = current;
-            unique.add(prev.getBoard().toString());
+            uniqueItems.add(prev.getBoard().toString());
             solution.add(prev.getBoard());
             current = gameTree.delMin();
-//            moves++;
 
             // subroutine for twins
             for (Board neighbor : currentTwin.getBoard().neighbors()) {
-                if (!neighbor.equals(prevTwin) && !uniqueTwin.contains(neighbor.toString())) {
-                    gameTwinTree.insert(new BoardContainer(moves, neighbor));
+                if (!neighbor.equals(prevTwin) && !uniqueTwinItems.contains(neighbor.toString())) {
+                    gameTwinTree.insert(new BoardContainer(currentTwin.getMoves() + 1, neighbor));
                 }
             }
             prevTwin = currentTwin;
-            uniqueTwin.add(prevTwin.getBoard().toString());
+            uniqueTwinItems.add(prevTwin.getBoard().toString());
             currentTwin = gameTwinTree.delMin();
         }
         if (current.getBoard().isGoal()) {
+            moves = current.getMoves();
             solvable = true;
         } else {
             moves = -1;
