@@ -16,6 +16,7 @@ public class Board {
         if (blocks != null) {
             N = blocks[0].length;
             // is good in terms of immutability
+            //tiles = blocks;
             tiles = new int[N][N];
             for (int i = 0; i < N; i++) {
                 for (int j = 0; j < N; j++) {
@@ -55,7 +56,7 @@ public class Board {
     public int manhattan() {
         if (manhattanCached == -1) {
             int res = 0;
-            int val = 0;
+            int val;
             int goalI, goalJ;
             for (int i = 0; i < N; i++) {
                 for (int j = 0; j < N; j++) {
