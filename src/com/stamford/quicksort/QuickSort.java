@@ -66,7 +66,7 @@ public class QuickSort {
                 break;
             case MEDIAN_OF_THREE:
                 int medianPosition = (int) Math.floor((right+left)/2);
-                int middle = AlgoUtils.getIthElement(2, array[left], array[right], array[medianPosition]);
+                int middle = -99; //AlgoUtils.getIthElement(2, array[left], array[right], array[medianPosition]);
                 if (array[right] == middle) {
                     swap(array, left, right);
                 } else if (array[medianPosition] == middle) {

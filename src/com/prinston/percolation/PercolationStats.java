@@ -1,10 +1,8 @@
 package com.prinston.percolation;
 
-import com.prinston.common.stdlib.StdOut;
-import com.prinston.common.stdlib.StdRandom;
-import com.prinston.common.stdlib.StdStats;
-
-import java.text.ParseException;
+import edu.princeton.cs.algs4.StdOut;
+import edu.princeton.cs.algs4.StdRandom;
+import edu.princeton.cs.algs4.StdStats;
 
 /**
  * Created with IntelliJ IDEA.
@@ -36,9 +34,6 @@ public class PercolationStats {
             }
             means[k-1] = (double) countOpened/(N*N);
         }
-        StdOut.println("mean = " + mean());
-        StdOut.println("stddev = " + stddev());
-        StdOut.println("95% confidence interval = " + confidenceLo() + ", " + confidenceHi());
     }
 
     public double mean() {
@@ -61,7 +56,10 @@ public class PercolationStats {
         try {
             int size = Integer.parseInt(args[0]);
             int count = Integer.parseInt(args[1]);
-            new PercolationStats(size, count);
+            PercolationStats stats = new PercolationStats(size, count);
+            StdOut.println("mean = " + stats.mean());
+            StdOut.println("stddev = " + stats.stddev());
+            StdOut.println("95% confidence interval = " + stats.confidenceLo() + ", " + stats.confidenceHi());
         } catch (NumberFormatException e) {
             StdOut.println(e.getMessage());
         }

@@ -1,6 +1,6 @@
 package com.prinston.percolation;
 
-import com.prinston.common.algs4.WeightedQuickUnionUF;
+import edu.princeton.cs.algs4.WeightedQuickUnionUF;
 
 /**
  * Created with IntelliJ IDEA.
