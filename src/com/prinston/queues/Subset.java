@@ -1,11 +1,11 @@
 package com.prinston.queues;
 
-import com.prinston.common.stdlib.StdIn;
-import com.prinston.common.stdlib.StdOut;
+import edu.princeton.cs.algs4.StdIn;
+import edu.princeton.cs.algs4.StdOut;
 
 public class Subset {
 
-    public static final void main(String[] args) {
+    public static void main(String[] args) {
         try {
             String s;
             RandomizedQueue<String> rq = new RandomizedQueue<String>();
