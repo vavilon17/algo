@@ -1,22 +1,10 @@
 package com.prinston.collinear;
 
-import com.prinston.common.stdlib.StdDraw;
+import edu.princeton.cs.algs4.StdDraw;
 
 import java.util.Comparator;
 
-/**
- * Created with IntelliJ IDEA.
- * User: vit
- * Date: 14.09.13
- */
 public class Point implements Comparable<Point> {
-
-    public final Comparator<Point> SLOPE_ORDER = new Comparator<Point>() {
-        @Override
-        public int compare(Point o1, Point o2) {
-            return Double.valueOf(slopeTo(o1)).compareTo(Double.valueOf(slopeTo(o2)));
-        }
-    };;
 
     private final int x;
     private final int y;
@@ -50,11 +38,22 @@ public class Point implements Comparable<Point> {
         }
     }
 
+    public Comparator<Point> slopeOrder() {
+        return new Comparator<Point>() {
+            @Override
+            public int compare(Point o1, Point o2) {
+                Double slope1 = slopeTo(o1);
+                Double slope2 = slopeTo(o2);
+                return slope1.compareTo(slope2);
+            }
+        };
+    }
+
     @Override
     public int compareTo(Point o) {
-        int comp = Integer.valueOf(y).compareTo(o.y);
+        int comp = Integer.compare(y, o.y);
         if (comp == 0) {
-            comp = Integer.valueOf(x).compareTo(o.x);
+            comp = Integer.compare(x, o.x);
         }
         return comp;
     }
