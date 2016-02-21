@@ -2,9 +2,6 @@ package com.prinston.puzzle8;
 
 import com.prinston.common.stdlib.In;
 
-/**
- * Created by vit on 29.07.2014.
- */
 public class PuzzleChecker {
 
     public static void main(String[] args) {
@@ -13,7 +10,7 @@ public class PuzzleChecker {
         for (String filename : args) {
 
             // read in the board specified in the filename
-            In in = new In(filename);
+            /*In in = new In(filename);
             int N = in.readInt();
             int[][] tiles = new int[N][N];
             for (int i = 0; i < N; i++) {
@@ -28,7 +25,7 @@ public class PuzzleChecker {
             Solver solver = new Solver(initial);
             long end = System.currentTimeMillis();
             System.out.println(filename + ": " + solver.moves() + " in " + (end - start) + " mills");
-            System.out.println(solver.solution());
+            System.out.println(solver.solution());*/
         }
     }
 }

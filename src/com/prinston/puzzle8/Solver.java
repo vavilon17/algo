@@ -1,14 +1,9 @@
 package com.prinston.puzzle8;
 
-import com.prinston.common.algs4.MinPQ;
-import com.prinston.common.stdlib.In;
-import com.prinston.common.stdlib.StdOut;
+import edu.princeton.cs.algs4.MinPQ;
 
 import java.util.*;
 
-/**
- * Created by vit on 29.07.2014.
- */
 public class Solver {
 
     private Deque<Board> solution = null;
@@ -111,29 +106,5 @@ public class Solver {
     // sequence of boards in a shortest solution; null if no solution
     public Iterable<Board> solution() {
         return solution;
-    }
-
-    // solve a slider puzzle (given below)
-    public static void main(String[] args) {
-        // create initial board from file
-        In in = new In(args[0]);
-        int N = in.readInt();
-        int[][] blocks = new int[N][N];
-        for (int i = 0; i < N; i++)
-            for (int j = 0; j < N; j++)
-                blocks[i][j] = in.readInt();
-        Board initial = new Board(blocks);
-
-        // solve the puzzle
-        Solver solver = new Solver(initial);
-
-        // print solution to standard output
-        if (!solver.isSolvable())
-            StdOut.println("No solution possible");
-        else {
-            StdOut.println("Minimum number of moves = " + solver.moves());
-            for (Board board : solver.solution())
-                StdOut.println(board);
-        }
     }
 }

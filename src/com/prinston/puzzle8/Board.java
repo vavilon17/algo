@@ -3,9 +3,6 @@ package com.prinston.puzzle8;
 import java.util.LinkedList;
 import java.util.List;
 
-/**
- * Created by vit on 29.07.2014.
- */
 public class Board {
 
     private final int N;
