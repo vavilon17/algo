@@ -1,8 +1,8 @@
 package com.stamford.common;
 
-import com.prinston.common.algs4.WeightedQuickUnionUF;
 import com.stamford.mst.EdgeMST;
 import com.stamford.mst.GraphMST;
+import edu.princeton.cs.algs4.WeightedQuickUnionUF;
 
 import java.io.File;
 import java.util.LinkedList;

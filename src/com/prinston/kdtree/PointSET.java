@@ -1,13 +1,12 @@
 package com.prinston.kdtree;
 
-import com.prinston.common.algs4.Point2D;
-import com.prinston.common.algs4.RectHV;
+import edu.princeton.cs.algs4.Point2D;
+import edu.princeton.cs.algs4.RectHV;
 
-import java.util.*;
+import java.util.TreeSet;
+import java.util.List;
+import java.util.ArrayList;
 
-/**
- * Created by vit on 16.08.2014.
- */
 public class PointSET {
 
     private TreeSet<Point2D> rbTree = null;
@@ -41,7 +40,7 @@ public class PointSET {
     }
 
     public Iterable<Point2D> range(RectHV rect) {
-        Set<Point2D> res = new HashSet<Point2D>();
+        List<Point2D> res = new ArrayList<>();
         for (Point2D point : rbTree) {
             if (rect.contains(point)) {
                 res.add(point);

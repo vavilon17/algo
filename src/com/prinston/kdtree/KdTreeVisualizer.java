@@ -1,7 +1,7 @@
 package com.prinston.kdtree;
 
-import com.prinston.common.algs4.Point2D;
-import com.prinston.common.stdlib.StdDraw;
+import edu.princeton.cs.algs4.Point2D;
+import edu.princeton.cs.algs4.StdDraw;
 
 /*************************************************************************
  *  Compilation:  javac KdTreeVisualizer.java

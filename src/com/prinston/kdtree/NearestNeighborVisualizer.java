@@ -1,8 +1,8 @@
 package com.prinston.kdtree;
 
-import com.prinston.common.algs4.Point2D;
-import com.prinston.common.stdlib.In;
-import com.prinston.common.stdlib.StdDraw;
+import edu.princeton.cs.algs4.In;
+import edu.princeton.cs.algs4.Point2D;
+import edu.princeton.cs.algs4.StdDraw;
 
 /*************************************************************************
  *  Compilation:  javac NearestNeighborVisualizer.java

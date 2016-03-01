@@ -1,7 +1,5 @@
 package com.prinston.puzzle8;
 
-import com.prinston.common.stdlib.In;
-
 public class PuzzleChecker {
 
     public static void main(String[] args) {

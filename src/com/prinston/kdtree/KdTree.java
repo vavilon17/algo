@@ -1,15 +1,12 @@
 package com.prinston.kdtree;
 
-import com.prinston.common.algs4.Point2D;
-import com.prinston.common.algs4.RectHV;
+import edu.princeton.cs.algs4.Point2D;
+import edu.princeton.cs.algs4.RectHV;
 
 import java.util.LinkedList;
 import java.util.List;
 
 
-/**
- * Created by vit on 16.08.2014.
- */
 public class KdTree {
 
     private static final boolean VERTICAL = true;
