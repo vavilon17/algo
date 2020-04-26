@@ -1,9 +1,9 @@
 package com.prinston;
 
-import com.prinston.percolation.Percolation;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
+import com.prinston.percolation.Percolation;
 
 @RunWith(JUnit4.class)
 public class PercolationTest {

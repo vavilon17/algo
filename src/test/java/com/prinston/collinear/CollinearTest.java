@@ -1,5 +1,9 @@
 package com.prinston.collinear;
 
+import com.prinston.collinear.BruteCollinearPoints;
+import com.prinston.collinear.FastCollinearPoints;
+import com.prinston.collinear.LineSegment;
+import com.prinston.collinear.Point;
 import edu.princeton.cs.algs4.In;
 import org.junit.Test;
 import org.junit.runner.RunWith;
