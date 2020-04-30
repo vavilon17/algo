@@ -39,6 +39,11 @@ public class SeamCarverTest extends Prinston2Test {
 
         seamCarver.removeHorizontalSeam(seam);
         printEnergies(seamCarver.picture());
+
+        seamCarver.picture().show();
+        while (true) {
+            int a = 1;
+        }
     }
 
     private void printEnergies(Picture picture) {
