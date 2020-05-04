@@ -8,6 +8,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.ArrayList;
+import java.util.stream.Collectors;
 
 public class BoggleSolver {
 
@@ -20,7 +21,7 @@ public class BoggleSolver {
     private int cols;
     private final Map<Integer, List<Integer>> edges = new HashMap<>();
 
-    private int[][] boardIndices;
+    private char[] boardSymbols;
 
     // Initializes the data structure using the given array of strings as the dictionary.
     // (You can assume each word in the dictionary contains only the uppercase letters A through Z.)
@@ -70,11 +71,12 @@ public class BoggleSolver {
     }
 
     private void setupDataStructs() {
-        boardIndices = new int[rows][cols];
+        this.boardSymbols = new char[rows*cols];
         for (int i = 0; i < rows; i++) {
             for (int j = 0; j < cols; j++) {
-                boardIndices[i][j] = i*cols + j;
-                addEdge(boardIndices[i][j], i, j);
+                int boardIndex = boardIndexByCoord(i, j);
+                addEdge(boardIndex, i, j);
+                boardSymbols[boardIndex] = currentBoard.getLetter(i, j);
             }
         }
     }
@@ -93,7 +95,7 @@ public class BoggleSolver {
     }
 
     private void dfs(int boardIdx, Set<String> validWords, boolean[] visited, StringBuilder currentPrefix) {
-        update(currentPrefix, boardIdx);
+        updatePrefix(currentPrefix, boardIdx);
         if (visited[boardIdx]) {
             return;
         }
@@ -110,49 +112,7 @@ public class BoggleSolver {
     }
 
     private Iterable<Integer> adjIndicesNotVisited(int boardIdx, boolean[] visited) {
-        List<Integer> res = new ArrayList<>();
-        for (int candidate : edges.get(boardIdx)) {
-            if (!visited[candidate]) {
-                res.add(candidate);
-            }
-        }
-        return res;
-//        int j = boardIdx % cols;
-//        int i = (boardIdx - j) / cols;
-//        List<Integer> adjBoardIndices = new ArrayList<>();
-//        // up left
-//        if (i > 0 && j > 0 && !visited[boardIndices[i-1][j-1]]) {
-//            adjBoardIndices.add(boardIndexByCoord(i-1, j-1));
-//        }
-//        // up
-//        if (i > 0 && !visited[boardIndices[i-1][j]]) {
-//            adjBoardIndices.add(boardIndexByCoord(i-1, j));
-//        }
-//        // up right
-//        if (i > 0 && j < cols-1 && !visited[boardIndices[i-1][j+1]]) {
-//            adjBoardIndices.add(boardIndexByCoord(i-1, j+1));
-//        }
-//        // right
-//        if (j < cols-1 && !visited[boardIndices[i][j+1]]) {
-//            adjBoardIndices.add(boardIndexByCoord(i, j+1));
-//        }
-//        // donw right
-//        if (i < rows-1 && j < cols-1 && !visited[boardIndices[i+1][j+1]]) {
-//            adjBoardIndices.add(boardIndexByCoord(i+1, j+1));
-//        }
-//        // down
-//        if (i < rows - 1 && !visited[boardIndices[i+1][j]]) {
-//            adjBoardIndices.add(boardIndexByCoord(i+1, j));
-//        }
-//        // down left
-//        if (i < rows-1 && j > 0 && !visited[boardIndices[i+1][j-1]]) {
-//            adjBoardIndices.add(boardIndexByCoord(i+1, j-1));
-//        }
-//        // left
-//        if (j > 0 && !visited[boardIndices[i][j-1]]) {
-//            adjBoardIndices.add(boardIndexByCoord(i, j-1));
-//        }
-//        return adjBoardIndices;
+        return edges.get(boardIdx).stream().filter(idx -> !visited[idx]).collect(Collectors.toList());
     }
 
     private List<Integer> adjBoardIndices(int i, int j) {
@@ -192,19 +152,13 @@ public class BoggleSolver {
         return adjBoardIndices;
     }
 
-    private void update(StringBuilder prefix, int boardIndex) {
-        char c = getLetterByBoardIdx(boardIndex);
+    private void updatePrefix(StringBuilder prefix, int boardIndex) {
+        char c = boardSymbols[boardIndex];
         prefix.append(c == 'Q' ? "QU" : c);
     }
 
     private int boardIndexByCoord(int i, int j) {
         return i*cols + j;
-    }
-
-    private char getLetterByBoardIdx(int boardIdx) {
-        int j = boardIdx % cols;
-        int i = (boardIdx - j) / cols;
-        return currentBoard.getLetter(i, j);
     }
 
     private boolean existWordsWithPrefix(StringBuilder prefix) {
