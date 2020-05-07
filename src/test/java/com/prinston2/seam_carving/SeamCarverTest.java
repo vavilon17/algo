@@ -29,18 +29,18 @@ public class SeamCarverTest extends Prinston2Test {
     public void seamTest() {
         Picture pic = new Picture(getPrinston2File("seam_carving/6x5.png"));
         SeamCarver seamCarver = new SeamCarver(pic);
-        printEnergies(seamCarver.picture());
+//        printEnergies(seamCarver.picture());
 
         int[] seam = seamCarver.findHorizontalSeam();
-        System.out.println("\nSeam: ");
-        for (int i : seam) {
-            System.out.print(i + ", ");
-        }
+//        System.out.println("\nSeam: ");
+//        for (int i : seam) {
+//            System.out.print(i + ", ");
+//        }
 
         seamCarver.removeHorizontalSeam(seam);
-        printEnergies(seamCarver.picture());
+//        printEnergies(seamCarver.picture());
 
-        seamCarver.picture().show();
+//        seamCarver.picture().show();
     }
 
     private void printEnergies(Picture picture) {

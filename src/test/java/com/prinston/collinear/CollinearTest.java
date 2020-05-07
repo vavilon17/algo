@@ -1,10 +1,7 @@
 package com.prinston.collinear;
 
-import com.prinston.collinear.BruteCollinearPoints;
-import com.prinston.collinear.FastCollinearPoints;
-import com.prinston.collinear.LineSegment;
-import com.prinston.collinear.Point;
 import edu.princeton.cs.algs4.In;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
@@ -15,9 +12,7 @@ import java.util.Set;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
-/**
- * Created by vit on 10.07.2014.
- */
+@Ignore
 @RunWith(JUnit4.class)
 public class CollinearTest {
 

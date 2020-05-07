@@ -18,19 +18,19 @@ public class BoggleTest extends Prinston2Test {
     @Test
     public void testReadFile() {
         BoggleBoard board = new BoggleBoard(getFullPath("boggle/board-antidisestablishmentarianisms.txt"));
-        StdOut.println(board.toString());
+//        StdOut.println(board.toString());
         assertEquals(1, board.rows());
         assertEquals(29, board.cols());
         assertEquals('D', board.getLetter(0, 4));
 
         board = new BoggleBoard(getFullPath("boggle/board-dichlorodiphenyltrichloroethanes.txt"));
-        StdOut.println(board.toString());
+//        StdOut.println(board.toString());
         assertEquals(32, board.rows());
         assertEquals(1, board.cols());
         assertEquals('E', board.getLetter(6, 0));
 
         board = new BoggleBoard(getFullPath("boggle/board4x4.txt"));
-        StdOut.println("\n" + board.toString());
+//        StdOut.println("\n" + board.toString());
         assertEquals(4, board.rows());
         assertEquals(4, board.cols());
         assertEquals('A', board.getLetter(0, 0));
