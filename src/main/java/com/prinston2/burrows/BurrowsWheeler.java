@@ -6,15 +6,14 @@ import edu.princeton.cs.algs4.BinaryStdOut;
 import java.util.Queue;
 import java.util.Map;
 import java.util.HashMap;
-import java.util.Arrays;
 import java.util.LinkedList;
 
 public class BurrowsWheeler {
 
     private static class TransformResult {
 
-        private int firstIndex;
-        private String resultString;
+        private final int firstIndex;
+        private final String resultString;
 
         public TransformResult(int firstIndex, String resultString) {
             this.firstIndex = firstIndex;
@@ -25,16 +24,8 @@ public class BurrowsWheeler {
             return firstIndex;
         }
 
-        public void setFirstIndex(int firstIndex) {
-            this.firstIndex = firstIndex;
-        }
-
         public String getResultString() {
             return resultString;
-        }
-
-        public void setResultString(String resultString) {
-            this.resultString = resultString;
         }
 
         private static TransformResult collect(String original) {
@@ -71,8 +62,7 @@ public class BurrowsWheeler {
         }
 
         private static String reconstructString(int first, String tString) {
-            char[] sortedFirstSymbols = tString.toCharArray();
-            Arrays.sort(sortedFirstSymbols); // TODO consider improving performance here
+            char[] sortedFirstSymbols = RadixSorter.sortCharArray(tString.toCharArray());
             int[] next = buildNextArray(tString, sortedFirstSymbols);
 
             StringBuilder result = new StringBuilder();
