@@ -1,6 +1,7 @@
 package com.prinston2.wordnet;
 
 import edu.princeton.cs.algs4.Digraph;
+import edu.princeton.cs.algs4.DirectedCycle;
 import edu.princeton.cs.algs4.In;
 
 import java.util.Map;
@@ -23,6 +24,7 @@ public class WordNet {
         }
         readSynsets(synsets);
         readHypernyms(hypernyms);
+        validateGraph();
     }
 
     // returns all WordNet nouns
@@ -112,6 +114,24 @@ public class WordNet {
             }
         }
         this.digraph = new Digraph(this.verticesSynsetsMap.size());
+    }
+
+    private void validateGraph() {
+        // check there is only one root
+        int numberOfRoots = 0;
+        for (Integer vertex : verticesSynsetsMap.keySet()) {
+            if (digraph.outdegree(vertex) == 0) {
+                numberOfRoots++;
+            }
+            if (numberOfRoots > 1) {
+                throw new IllegalArgumentException();
+            }
+        }
+
+        // check cycles
+        if (new DirectedCycle(digraph).hasCycle()) {
+            throw new IllegalArgumentException();
+        }
     }
 
     private void validateNouns(String nounA, String nounB) {

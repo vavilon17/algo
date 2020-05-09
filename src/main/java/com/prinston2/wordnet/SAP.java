@@ -118,8 +118,8 @@ public class SAP {
         if (vertices == null) {
             throw new IllegalArgumentException();
         }
-        for (int v : vertices) {
-            if (v < 0 || v >= digraph.V()) {
+        for (Integer v : vertices) {
+            if (v == null || v < 0 || v >= digraph.V()) {
                 throw new IllegalArgumentException();
             }
         }
